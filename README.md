@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![Portfolio preview](public/assets/og-image.png)
+
+# Khash-Erdene — Portfolio
+
+Personal portfolio site of **Khash-Erdene**, a software engineer and fullstack developer based in Ulaanbaatar, Mongolia. Built as a single-page bento-grid layout with a focus on refined motion, dark-first aesthetics, and performant rendering.
+
+> Software engineer at Arigbank · turning ideas into refined, performant web experiences since 2021.
+
+## Tech Stack
+
+- **Framework:** [Next.js 16](https://nextjs.org) (Turbopack, React Compiler enabled)
+- **UI:** React 19, Tailwind CSS 4 (PostCSS, no config file), `next-themes` for dark mode
+- **Motion:** Framer Motion
+- **Icons:** Lucide React
+- **Tooling:** TypeScript, Biome (formatter + linter)
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and run the dev server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start the development server |
+| `pnpm build` | Build for production |
+| `pnpm start` | Run the production build |
+| `pnpm lint` | Lint with Biome |
+| `pnpm format` | Format code with Biome |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/         layout.tsx, page.tsx, globals.css
+  components/
+    home/      intro + bento grid of cards
+      cards/   github, anime, location, experience, social-links,
+               music, books, stacks, now
+    layout/    header, footer, nav
+    theme/     theme provider & switcher
+    ui/        aurora, grain, marquee, status-pill
+    icons.tsx
+  hooks/       use-mounted
+  lib/         config, utils
+public/
+  assets/      images (me, og-image, books, music, anime, octocat)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Email:** [khasherdene.day@gmail.com](mailto:khasherdene.day@gmail.com)
+- **GitHub:** [@khasherdene-b](https://github.com/khasherdene-b)
+- **LinkedIn:** [in/khasherdene0](https://www.linkedin.com/in/khasherdene0)
+- **Instagram:** [@khasherdene28_](https://instagram.com/khasherdene28_)
