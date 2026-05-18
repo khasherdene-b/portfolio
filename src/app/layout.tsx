@@ -16,16 +16,37 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://khasherdene.vercel.app"),
   title: "Khash-Erdene — Software Engineer",
   description:
     "Software engineer and fullstack developer based in Ulaanbaatar, Mongolia. Building fast, thoughtful web experiences.",
   keywords: ["software engineer", "fullstack developer", "Mongolia", "Next.js", "React"],
   authors: [{ name: "Khash-Erdene" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Khash-Erdene — Software Engineer",
     description:
       "Software engineer and fullstack developer based in Ulaanbaatar, Mongolia.",
     type: "website",
+    url: "/",
+    siteName: "Khash-Erdene",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Khash-Erdene — Software Engineer",
+    description:
+      "Software engineer and fullstack developer based in Ulaanbaatar, Mongolia.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
