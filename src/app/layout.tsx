@@ -20,7 +20,13 @@ export const metadata: Metadata = {
   title: "Khash-Erdene — Software Engineer",
   description:
     "Software engineer and fullstack developer based in Ulaanbaatar, Mongolia. Building fast, thoughtful web experiences.",
-  keywords: ["software engineer", "fullstack developer", "Mongolia", "Next.js", "React"],
+  keywords: [
+    "software engineer",
+    "fullstack developer",
+    "Mongolia",
+    "Next.js",
+    "React",
+  ],
   authors: [{ name: "Khash-Erdene" }],
   alternates: {
     canonical: "/",
