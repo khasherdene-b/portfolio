@@ -1,5 +1,6 @@
 import { GithubIcon } from "@/components/icons";
 import { Spotlight } from "@/components/ui/spotlight";
+import { personalInfo } from "@/lib/config";
 import { ArrowUpRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import Link from "next/link";
 export function GithubCard() {
   return (
     <Link
-      href="https://github.com/khasherdene-xt"
+      href={personalInfo.github}
       target="_blank"
       rel="noopener noreferrer"
       className="block h-full"
