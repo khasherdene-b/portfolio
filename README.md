@@ -2,10 +2,6 @@
 
 # Khash-Erdene — Portfolio
 
-Personal portfolio site of **Khash-Erdene**, a software engineer and fullstack developer based in Ulaanbaatar, Mongolia. Built as a single-page bento-grid layout with a focus on refined motion, dark-first aesthetics, and performant rendering.
-
-> Software engineer at Arigbank · turning ideas into refined, performant web experiences since 2021.
-
 ## Tech Stack
 
 - **Framework:** [Next.js 16](https://nextjs.org) (Turbopack, React Compiler enabled)
@@ -27,31 +23,31 @@ Open [http://localhost:3000](http://localhost:3000) to view it.
 
 ### Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Run the production build |
-| `pnpm lint` | Lint with Biome |
-| `pnpm format` | Format code with Biome |
+| Command       | Description                  |
+| ------------- | ---------------------------- |
+| `pnpm dev`    | Start the development server |
+| `pnpm build`  | Build for production         |
+| `pnpm start`  | Run the production build     |
+| `pnpm lint`   | Lint with Biome              |
+| `pnpm format` | Format code with Biome       |
 
 ## Project Structure
 
 ```
 src/
-  app/         layout.tsx, page.tsx, globals.css
-  components/
-    home/      intro + bento grid of cards
-      cards/   github, anime, location, experience, social-links,
-               music, books, stacks, now
-    layout/    header, footer, nav
-    theme/     theme provider & switcher
-    ui/        aurora, grain, marquee, status-pill
-    icons.tsx
-  hooks/       use-mounted
-  lib/         config, utils
-public/
-  assets/      images (me, og-image, books, music, anime, octocat)
+├── app/                      # layout.tsx, page.tsx, globals.css
+├── features/
+│   ├── hero/                 # HeroSection, WordFadeBio, MagneticCTA, useMagnetic
+│   ├── bento/                # BentoGrid, all cards, bento-layout.data.ts, useMusicPlayer
+│   ├── navigation/           # Header, Nav, Footer, useRotatingEmoji
+│   └── theme/                # ThemeProvider, ThemeSwitcher
+└── shared/
+    ├── components/
+    │   ├── ui/               # aurora, grain, spotlight, marquee, equalizer, status-pill,
+    │   │                     # card-base, glow-border, badge, scroll-progress, page-spotlight
+    │   └── icons/            # brand-icons.tsx, social-icons.tsx, index.ts
+    ├── hooks/                # use-mounted, use-mongolia-time
+    └── lib/                  # config.ts (typed PersonalInfo/SiteConfig), utils.ts
 ```
 
 ## Contact
@@ -59,4 +55,4 @@ public/
 - **Email:** [khasherdene.day@gmail.com](mailto:khasherdene.day@gmail.com)
 - **GitHub:** [@khasherdene-b](https://github.com/khasherdene-b)
 - **LinkedIn:** [in/khasherdene0](https://www.linkedin.com/in/khasherdene0)
-- **Instagram:** [@khasherdene28_](https://instagram.com/khasherdene28_)
+- **Instagram:** [@khasherdene28\_](https://instagram.com/khasherdene28_)
