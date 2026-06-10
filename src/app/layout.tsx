@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme/provider";
-import { Aurora } from "@/components/ui/aurora";
-import { Grain } from "@/components/ui/grain";
+import { ThemeProvider } from "@/features/theme/components/provider";
+import { Aurora } from "@/shared/components/ui/aurora";
+import { Grain } from "@/shared/components/ui/grain";
+import { PageSpotlight } from "@/shared/components/ui/page-spotlight";
+import { ScrollProgress } from "@/shared/components/ui/scroll-progress";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -69,6 +71,8 @@ export default function RootLayout({
     >
       <body className="relative min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ScrollProgress />
+          <PageSpotlight />
           <Aurora />
           {children}
           <Grain />

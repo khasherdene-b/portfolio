@@ -394,3 +394,19 @@ body {
 .spotlight:hover::before {
   opacity: 1;
 }
+
+/* Page-level cursor glow (driven by --page-x/--page-y set by PageSpotlight) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--page-x, 50vw) var(--page-y, 50vh),
+    var(--primary-glow),
+    transparent 60%
+  );
+  opacity: 0.35;
+  transition: opacity 0.15s;
+}
