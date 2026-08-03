@@ -25,13 +25,7 @@ export function useMusicPlayer(duration: string, playing: boolean) {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setCurrentSeconds((prev) => {
-        if (prev >= totalSeconds) {
-          if (intervalRef.current) clearInterval(intervalRef.current);
-          return totalSeconds;
-        }
-        return prev + 1;
-      });
+      setCurrentSeconds((prev) => (prev + 1 >= totalSeconds ? 0 : prev + 1));
     }, 1000);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);

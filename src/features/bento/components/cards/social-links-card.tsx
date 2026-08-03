@@ -1,9 +1,13 @@
 import Link from "next/link";
-import { InstagramIcon, LinkedinIcon } from "@/shared/components/icons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
+} from "@/shared/components/icons";
 import { personalInfo } from "@/shared/lib/config";
 
 export function SocialLinksCard() {
-  const { linkedin, instagram } = personalInfo.social;
+  const { linkedin, instagram, facebook } = personalInfo.social;
 
   return (
     <div className="flex h-full gap-2">
@@ -30,6 +34,19 @@ export function SocialLinksCard() {
         <InstagramIcon className="relative size-5" />
         <p className="relative text-[11px] -rotate-2 text-white/50 transition-colors group-hover:text-white/90">
           for connection
+        </p>
+      </Link>
+
+      <Link
+        href={facebook}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative flex h-full min-h-16 w-full flex-col items-center justify-center gap-0.5 overflow-hidden rounded-xl bg-[#1877F2] text-white ring-1 ring-white/5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px] hover:shadow-[#1877F2]/60"
+      >
+        <span className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/0 via-white/20 to-white/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <FacebookIcon className="relative size-5" />
+        <p className="relative text-[11px] -rotate-2 text-white/70 transition-colors group-hover:text-white">
+          old school
         </p>
       </Link>
     </div>

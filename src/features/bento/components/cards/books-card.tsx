@@ -1,13 +1,9 @@
-import { ArrowUpRight, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 export function BooksCard() {
   return (
-    <Link
-      href="/books"
-      className="group relative flex h-full min-h-30 w-full overflow-hidden rounded-2xl border border-border ring-1 ring-transparent transition-all duration-500 hover:ring-primary/30 hover:-translate-y-0.5"
-    >
+    <div className="group relative flex h-full min-h-30 w-full overflow-hidden rounded-2xl border border-border ring-1 ring-transparent transition-all duration-500 hover:ring-primary/30 hover:-translate-y-0.5">
       <Image
         src="/assets/books.jpg"
         alt="Books"
@@ -16,8 +12,6 @@ export function BooksCard() {
       />
       <span className="absolute inset-0 bg-linear-to-t from-black/75 via-black/30 to-black/10" />
       <span className="absolute inset-0 bg-linear-to-tr from-emerald-900/40 via-transparent to-transparent mix-blend-overlay" />
-
-      <ArrowUpRight className="absolute right-3 top-3 size-4 text-white/70 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:-translate-y-0.5" />
 
       <div className="absolute inset-0 flex flex-col justify-between px-4 py-3 text-white">
         <div className="flex items-center justify-between">
@@ -35,6 +29,6 @@ export function BooksCard() {
           </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

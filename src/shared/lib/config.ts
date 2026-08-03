@@ -2,7 +2,7 @@ export interface SocialLinks {
   github: string;
   linkedin: string;
   instagram: string;
-  email: string;
+  facebook: string;
 }
 
 export interface PersonalInfo {
@@ -26,9 +26,9 @@ export const personalInfo: PersonalInfo = {
   coordinates: { lat: "47.92°N", lng: "106.92°E" },
   social: {
     github: "https://github.com/khasherdene-b",
-    linkedin: "https://www.linkedin.com/in/khasherdene0",
-    instagram: "https://instagram.com/khasherdene28_",
-    email: "khasherdene.day@gmail.com",
+    linkedin: "https://www.linkedin.com/in/khasherdene.bo",
+    facebook: "https://www.facebook.com/khasherdene.bo",
+    instagram: "https://instagram.com/khasherdene.bo",
   },
 };
 

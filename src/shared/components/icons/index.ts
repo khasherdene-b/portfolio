@@ -20,4 +20,9 @@ export {
   SpringLightIcon,
 } from "./brand-icons";
 
-export { GithubIcon, InstagramIcon, LinkedinIcon } from "./social-icons";
+export {
+  FacebookIcon,
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+} from "./social-icons";

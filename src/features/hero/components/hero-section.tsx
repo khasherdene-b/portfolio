@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { StatusPill } from "@/shared/components/ui/status-pill";
 import { personalInfo } from "@/shared/lib/config";
@@ -65,23 +65,13 @@ export function HeroSection() {
       >
         <Magnetic>
           <Link
-            href={`mailto:${personalInfo.social.email}`}
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:shadow-[0_8px_30px_-8px] hover:shadow-primary/60 hover:-translate-y-0.5"
-          >
-            <Mail className="size-3.5" />
-            Drop an email
-            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-        </Magnetic>
-        <Magnetic>
-          <Link
             href={personalInfo.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground transition-all hover:border-primary/40 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:shadow-[0_8px_30px_-8px] hover:shadow-primary/60 hover:-translate-y-0.5"
           >
             Say hi on Instagram
-            <ArrowUpRight className="size-3.5 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
+            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </Magnetic>
       </motion.div>

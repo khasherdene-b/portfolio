@@ -41,6 +41,26 @@ export function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+export function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      width="1em"
+      height="1em"
+      {...props}
+    >
+      <g fill="none">
+        <rect width="256" height="256" fill="#1877F2" rx="60"></rect>
+        <path
+          fill="#fff"
+          d="M170.516 152.06l6.5-42.35h-40.63v-27.49c0-11.59 5.68-22.887 23.888-22.887h18.482V24.36S161.75 21 145.437 21c-33.078 0-54.693 20.041-54.693 56.33v31.38H54.48v42.35h36.264v102.4c7.278 1.143 14.734 1.737 22.334 1.737c7.6 0 15.056-.594 22.334-1.737v-102.4z"
+        ></path>
+      </g>
+    </svg>
+  );
+}
+
 export function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

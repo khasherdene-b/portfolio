@@ -1,9 +1,10 @@
 "use client";
 
+import { useInView } from "framer-motion";
 import { Music, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Equalizer } from "@/shared/components/ui/equalizer";
 import { Spotlight } from "@/shared/components/ui/spotlight";
 import { cn } from "@/shared/lib/utils";
@@ -12,13 +13,16 @@ import { useMusicPlayer } from "../../hooks/use-music-player";
 
 export function MusicCard() {
   const [hovered, setHovered] = useState(false);
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const isInView = useInView(cardRef, { amount: 0.4 });
   const { currentTime, progress, isPlaying } = useMusicPlayer(
     TRACK.duration,
-    hovered,
+    isInView,
   );
 
   return (
     <Link
+      ref={cardRef}
       href={TRACK.url}
       target="_blank"
       rel="noopener noreferrer"
@@ -79,7 +83,12 @@ export function MusicCard() {
         </div>
 
         {/* Waveform */}
-        <div className="flex h-6 items-end gap-px px-4 pb-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div
+          className={cn(
+            "flex h-6 items-end gap-px px-4 pb-1 transition-opacity duration-300",
+            isPlaying ? "opacity-100" : "opacity-0",
+          )}
+        >
           {Array.from({ length: 28 }).map((_, i) => (
             <span
               key={i}
