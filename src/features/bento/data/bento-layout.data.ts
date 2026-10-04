@@ -1,10 +1,7 @@
 import {
-  AnimeCard,
-  BooksCard,
   ExperienceCard,
   GithubCard,
   LocationCard,
-  MusicCard,
   NowCard,
   SocialLinksCard,
   StacksCard,
@@ -20,15 +17,7 @@ export const BENTO_LAYOUT: GridLayout = [
       { id: "now", component: NowCard },
     ],
   },
-  // Row 2: Music (2/3) + Anime (1/3)
-  {
-    cols: 3,
-    cells: [
-      { id: "music", component: MusicCard, colSpan: 2 },
-      { id: "anime", component: AnimeCard },
-    ],
-  },
-  // Row 3: [Social + Experience stacked] + Location — equal halves
+  // Row 2: [Social + Experience stacked] + Location — equal halves
   {
     cols: 2,
     cells: [
@@ -42,12 +31,9 @@ export const BENTO_LAYOUT: GridLayout = [
       { id: "location", component: LocationCard },
     ],
   },
-  // Row 4: Stacks + Books — equal halves
+  // Row 3: Stack — full width so the marquee has room to breathe
   {
-    cols: 2,
-    cells: [
-      { id: "stacks", component: StacksCard },
-      { id: "books", component: BooksCard },
-    ],
+    cols: 1,
+    cells: [{ id: "stacks", component: StacksCard }],
   },
 ];

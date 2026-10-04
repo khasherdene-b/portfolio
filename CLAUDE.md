@@ -16,22 +16,27 @@
 Features live in `src/features/<name>/`. Shared code lives in `src/shared/`.
 
 Rule: one feature uses it → inside that feature. Two+ features use it → `shared/`.
-
+e
 ```
 src/
-├── app/                      # layout.tsx, page.tsx, globals.css
+├── app/                      # layout, page, providers (theme + MotionConfig), globals.css,
+│                             # sitemap.ts, robots.ts
 ├── features/
-│   ├── hero/                 # HeroSection, WordFadeBio, MagneticCTA, useMagnetic
-│   ├── bento/                # BentoGrid, all cards, bento-layout.data.ts, useMusicPlayer
-│   ├── navigation/           # Header, Nav, Footer, useRotatingEmoji
+│   ├── hero/                 # HeroSection (server), Portrait, RotatingRole, HeroSocials,
+│   │                         # Magnetic, hero.data.ts (rotating phrases)
+│   ├── bento/                # BentoGrid (server), cards, bento-layout.data.ts
+│   ├── projects/             # ProjectsSection, ProjectRow, projects.data.ts
+│   ├── command-menu/         # ⌘K palette (native <dialog>), useCommandItems
+│   ├── navigation/           # Header (sticky), Nav, SectionNav, Footer, useScrolled
 │   └── theme/                # ThemeProvider, ThemeSwitcher
 └── shared/
     ├── components/
-    │   ├── ui/               # aurora, grain, spotlight, marquee, equalizer, status-pill,
-    │   │                     # card-base, glow-border, badge, scroll-progress, page-spotlight
-    │   └── icons/            # brand-icons.tsx, social-icons.tsx, index.ts
-    ├── hooks/                # use-mounted, use-mongolia-time
-    └── lib/                  # config.ts (typed PersonalInfo/SiteConfig), utils.ts
+    │   ├── ui/               # aurora, grain, spotlight, marquee, status-pill, card-base,
+    │   │                     # badge, reveal, section-heading,
+    │   │                     # scroll-progress, page-spotlight
+    │   └── icons/            # brand-icons, social-icons (colour tiles), brand-glyphs (mono)
+    ├── hooks/                # use-mounted, use-mongolia-time, use-active-section
+    └── lib/                  # config.ts (PersonalInfo, SiteConfig, SECTIONS), utils.ts
 ```
 
 ## Adding a Bento Card
@@ -42,24 +47,36 @@ src/
 
 `BentoGrid` never changes — it renders from the data config (Open/Closed Principle).
 
+## Adding a Project
+
+Add one entry to `src/features/projects/data/projects.data.ts` (newest first).
+
+## Adding a Page Section
+
+1. Render a `<section id="…" className="scroll-mt-24">` with a `SectionHeading`.
+2. Add `{ id, label }` to `SECTIONS` in `shared/lib/config.ts` — the header nav and ⌘K menu pick it up automatically.
+
 ## Component Rules
 
 - Max 200 lines per file. Split if larger.
 - Server Components by default. Add `"use client"` only for state/effects/browser APIs.
+  Keep client code in small leaf islands (e.g. `Reveal`, `Magnetic`) and pass server-rendered children into them.
+- Content that must not differ between server and first client render (theme, time, platform) must be gated behind `useMounted` to avoid hydration mismatches.
+- Respect reduced motion: framer is wrapped in `MotionConfig reducedMotion="user"`; CSS animations are neutralised in `globals.css`.
 - All bento cards must use `CardBase` from `shared/components/ui/card-base.tsx` as their outer wrapper.
 - Framer Motion: `ease` must be typed `as const` when using cubic-bezier arrays to satisfy TS.
 
 ## Styling
 
-- Tailwind CSS 4 — use `@variant dark (&:is(.dark *))` for dark mode overrides (NOT `dark:` prefix)
+- Tailwind CSS 4 — dark mode is defined with `@custom-variant dark (&:where(.dark, .dark *))` in `globals.css`; prefer the CSS-var tokens (they switch automatically) over `dark:` overrides
 - Design tokens are CSS vars in `globals.css` — never hardcode colors
 - Use `cn()` from `shared/lib/utils` for conditional class merging
-- Key animation classes: `text-shimmer`, `animate-float`, `animate-aurora`, `animate-marquee`, `eq-bar`
+- Key animation classes: `text-shimmer`, `animate-float`, `animate-aurora`, `animate-marquee`, `stagger`
 - Card appearance: always goes through `card-luxe` CSS class (via `CardBase`)
 
 ## Config
 
-`shared/lib/config.ts` exports typed `PersonalInfo`. Access social links via `personalInfo.social.email`, `personalInfo.social.github`, etc. — not flat `personalInfo.email`.
+`shared/lib/config.ts` exports typed `PersonalInfo`. Access social links via `personalInfo.social.github`, `personalInfo.social.linkedin`, etc. — not flat `personalInfo.github`.
 
 ## Lint / Format
 

@@ -12,7 +12,7 @@ export interface BentoCell {
 }
 
 export interface BentoRowConfig {
-  cols?: 2 | 3;
+  cols?: 1 | 2 | 3;
   cells: BentoCell[];
 }
 

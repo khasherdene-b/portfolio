@@ -1,6 +1,6 @@
 ![Portfolio preview](public/assets/og-image.png)
 
-# Khash-Erdene — Portfolio
+# Khash-Erdene — Portfolio v2.0
 
 ## Tech Stack
 
@@ -35,24 +35,28 @@ Open [http://localhost:3000](http://localhost:3000) to view it.
 
 ```
 src/
-├── app/                      # layout.tsx, page.tsx, globals.css
+├── app/                      # layout, page, providers (theme + MotionConfig), globals.css,
+│                             # sitemap.ts, robots.ts
 ├── features/
-│   ├── hero/                 # HeroSection, WordFadeBio, MagneticCTA, useMagnetic
-│   ├── bento/                # BentoGrid, all cards, bento-layout.data.ts, useMusicPlayer
-│   ├── navigation/           # Header, Nav, Footer, useRotatingEmoji
+│   ├── hero/                 # HeroSection (server), Portrait, RotatingRole, HeroSocials,
+│   │                         # Magnetic, hero.data.ts (rotating phrases)
+│   ├── bento/                # BentoGrid (server), cards, bento-layout.data.ts
+│   ├── projects/             # ProjectsSection, ProjectRow, projects.data.ts
+│   ├── command-menu/         # ⌘K palette (native <dialog>), useCommandItems
+│   ├── navigation/           # Header (sticky), Nav, SectionNav, Footer, useScrolled
 │   └── theme/                # ThemeProvider, ThemeSwitcher
 └── shared/
     ├── components/
-    │   ├── ui/               # aurora, grain, spotlight, marquee, equalizer, status-pill,
-    │   │                     # card-base, glow-border, badge, scroll-progress, page-spotlight
-    │   └── icons/            # brand-icons.tsx, social-icons.tsx, index.ts
-    ├── hooks/                # use-mounted, use-mongolia-time
-    └── lib/                  # config.ts (typed PersonalInfo/SiteConfig), utils.ts
+    │   ├── ui/               # aurora, grain, spotlight, marquee, status-pill, card-base,
+    │   │                     # badge, reveal, section-heading,
+    │   │                     # scroll-progress, page-spotlight
+    │   └── icons/            # brand-icons, social-icons (colour tiles), brand-glyphs (mono)
+    ├── hooks/                # use-mounted, use-mongolia-time, use-active-section
+    └── lib/                  # config.ts (PersonalInfo, SiteConfig, SECTIONS), utils.ts
 ```
 
-## Contact
+## Links
 
-- **Email:** [khasherdene.day@gmail.com](mailto:khasherdene.day@gmail.com)
 - **GitHub:** [@khasherdene-b](https://github.com/khasherdene-b)
-- **LinkedIn:** [in/khasherdene0](https://www.linkedin.com/in/khasherdene0)
-- **Instagram:** [@khasherdene28\_](https://instagram.com/khasherdene28_)
+- **LinkedIn:** [in/khasherdene0](https://www.linkedin.com/in/khasherdene.bo)
+- **Instagram:** [@khasherdene28\_](https://instagram.com/khasherdene.bo)

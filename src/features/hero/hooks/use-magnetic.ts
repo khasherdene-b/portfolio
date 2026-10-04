@@ -1,6 +1,6 @@
 "use client";
 
-import { useMotionValue, useSpring } from "framer-motion";
+import { useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { type RefObject, useRef } from "react";
 
 export interface MagneticValues {
@@ -13,13 +13,14 @@ export interface MagneticValues {
 
 export function useMagnetic(strength = 0.35): MagneticValues {
   const ref = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 150, damping: 15 });
   const springY = useSpring(y, { stiffness: 150, damping: 15 });
 
   function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (!ref.current) return;
+    if (!ref.current || reduceMotion) return;
     const rect = ref.current.getBoundingClientRect();
     x.set((e.clientX - rect.left - rect.width / 2) * strength);
     y.set((e.clientY - rect.top - rect.height / 2) * strength);

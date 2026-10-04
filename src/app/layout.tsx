@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/features/theme/components/provider";
 import { Aurora } from "@/shared/components/ui/aurora";
 import { Grain } from "@/shared/components/ui/grain";
 import { PageSpotlight } from "@/shared/components/ui/page-spotlight";
 import { ScrollProgress } from "@/shared/components/ui/scroll-progress";
+import { personalInfo, siteConfig } from "@/shared/lib/config";
+import { Providers } from "./providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,36 +18,38 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const shortDescription = `Software engineer and fullstack developer based in ${personalInfo.location}.`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://khasherdene.vercel.app"),
-  title: "Khash-Erdene — Software Engineer",
-  description:
-    "Software engineer and fullstack developer based in Ulaanbaatar, Mongolia. Building fast, thoughtful web experiences.",
+  metadataBase: new URL(siteConfig.url),
+  title: siteConfig.title,
+  description: siteConfig.description,
   keywords: [
     "software engineer",
     "fullstack developer",
     "Mongolia",
+    "Ulaanbaatar",
     "Next.js",
     "React",
+    "TypeScript",
   ],
-  authors: [{ name: "Khash-Erdene" }],
+  authors: [{ name: personalInfo.name, url: siteConfig.url }],
+  creator: personalInfo.name,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Khash-Erdene — Software Engineer",
-    description:
-      "Software engineer and fullstack developer based in Ulaanbaatar, Mongolia.",
-    type: "website",
+    title: siteConfig.title,
+    description: shortDescription,
+    type: "profile",
     url: "/",
-    siteName: "Khash-Erdene",
+    siteName: personalInfo.name,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Khash-Erdene — Software Engineer",
-    description:
-      "Software engineer and fullstack developer based in Ulaanbaatar, Mongolia.",
+    title: siteConfig.title,
+    description: shortDescription,
   },
   robots: {
     index: true,
@@ -56,6 +59,14 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f8f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#06080a" },
+  ],
+  colorScheme: "dark light",
 };
 
 export default function RootLayout({
@@ -69,14 +80,20 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="relative min-h-full flex flex-col bg-background text-foreground">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <body className="relative flex min-h-full flex-col bg-background text-foreground">
+        <a
+          href="#main"
+          className="sr-only z-100 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to content
+        </a>
+        <Providers>
           <ScrollProgress />
           <PageSpotlight />
           <Aurora />
           {children}
           <Grain />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

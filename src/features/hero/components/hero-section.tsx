@@ -1,80 +1,62 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import { StatusPill } from "@/shared/components/ui/status-pill";
 import { personalInfo } from "@/shared/lib/config";
-import { Magnetic } from "./magnetic-cta";
-import { WordFadeBio } from "./word-fade-bio";
+import { HeroSocials } from "./hero-socials";
+import { Portrait } from "./portrait";
+import { RotatingRole } from "./rotating-role";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: -8 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, delay, ease: EASE },
-});
-
+/**
+ * Server-rendered hero. Entrance motion is pure CSS (`.stagger`); the only
+ * client islands are the rotating role line and the magnetic CTA.
+ */
 export function HeroSection() {
   return (
-    <section className="mt-10">
-      <motion.div {...fadeUp(0.05)}>
-        <StatusPill label="Software engineer at Arigbank" />
-      </motion.div>
+    <section
+      aria-labelledby="hero-heading"
+      className="relative isolate pt-8 sm:pt-20"
+    >
+      {/* Dotted backdrop that fades out from the top */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 -top-24 -z-10 h-136 bg-[radial-gradient(circle,var(--border)_1px,transparent_1px)] bg-size-[20px_20px] mask-[radial-gradient(ellipse_70%_60%_at_50%_30%,black,transparent)]"
+      />
 
-      <motion.h1
-        className="mt-5 text-[2rem] leading-[1.05] font-semibold tracking-tight sm:text-[2.4rem]"
-        {...fadeUp(0.15)}
-      >
-        Hi, I&apos;m <span className="text-shimmer">Khash-Erdene</span>
-        <span className="text-primary">.</span>
-      </motion.h1>
+      <div className="stagger">
+        <div className="flex flex-col-reverse gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <StatusPill
+              label={`Software engineer at ${personalInfo.company}`}
+            />
+            <h1
+              id="hero-heading"
+              className="mt-5 text-[2.5rem] font-semibold leading-[1.02] tracking-tighter text-balance sm:text-6xl"
+            >
+              <span className="block text-muted-foreground/70 text-[0.55em] font-medium tracking-tight">
+                Hi, I&apos;m
+              </span>
+              <span className="text-shimmer">{personalInfo.name}</span>
+              <span className="text-primary">.</span>
+            </h1>
+          </div>
+          <Portrait />
+        </div>
 
-      <motion.p
-        className="mt-4 max-w-prose text-[0.95rem] leading-7 text-muted-foreground"
-        {...fadeUp(0.25)}
-      >
-        <WordFadeBio baseDelay={0.25}>
-          A fullstack engineer from Ulaanbaatar, Mongolia — turning ideas into
-          refined, performant web experiences. I&apos;ve been writing code since
-          2021, chasing the sweet spot between detail-obsessed craft and
-          pragmatic shipping.
-        </WordFadeBio>
-      </motion.p>
+        <div className="mt-6">
+          <RotatingRole />
+        </div>
 
-      <motion.p
-        className="mt-3 max-w-prose text-[0.95rem] leading-7 text-muted-foreground"
-        {...fadeUp(0.35)}
-      >
-        Currently exploring AI-augmented tooling, edge databases, and the next
-        generation of design-engineering workflows.
-      </motion.p>
+        <p className="mt-5 max-w-prose text-[0.975rem] leading-7 text-muted-foreground text-pretty">
+          Fullstack engineer and UI/UX-minded builder from{" "}
+          {personalInfo.location}. Writing code since 2021, I chase the sweet
+          spot between{" "}
+          <span className="text-foreground">detail-obsessed craft</span> and{" "}
+          <span className="text-foreground">pragmatic shipping</span> — lately
+          exploring AI-augmented tooling and design-engineering workflows.
+        </p>
 
-      <motion.div className="my-6 flex items-center gap-3" {...fadeUp(0.45)}>
-        <span className="h-px flex-1 bg-linear-to-r from-transparent via-primary/40 to-transparent" />
-        <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-          let&apos;s talk
-        </span>
-        <span className="h-px flex-1 bg-linear-to-r from-transparent via-primary/40 to-transparent" />
-      </motion.div>
-
-      <motion.div
-        className="flex flex-wrap items-center gap-2.5"
-        {...fadeUp(0.5)}
-      >
-        <Magnetic>
-          <Link
-            href={personalInfo.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:shadow-[0_8px_30px_-8px] hover:shadow-primary/60 hover:-translate-y-0.5"
-          >
-            Say hi on Instagram
-            <ArrowUpRight className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-        </Magnetic>
-      </motion.div>
+        <div className="mt-8">
+          <HeroSocials />
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Class-based dark mode for next-themes */
-@variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ── Light theme ─────────────────────────────────────────────── */
 :root {
@@ -91,11 +91,8 @@
   --animate-marquee-reverse: marquee var(--duration, 30s) linear infinite
     reverse;
   --animate-aurora: aurora 18s ease-in-out infinite;
-  --animate-shimmer: shimmer 3.2s linear infinite;
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-equalize: equalize 1.1s ease-in-out infinite;
-  --animate-gradient: gradient-shift 8s ease infinite;
 }
 
 /* ── Keyframes ───────────────────────────────────────────────── */
@@ -162,23 +159,14 @@
   }
 }
 
-@keyframes equalize {
-  0%,
-  100% {
-    transform: scaleY(0.35);
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
   }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes gradient-shift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -200,6 +188,21 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+/* Lock page scroll while a modal <dialog> (command menu) is open. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* One consistent, high-contrast focus ring for keyboard users. Kept in the
+   base layer so Tailwind utilities (e.g. outline-none) can still override it. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
 }
 
 body {
@@ -244,9 +247,6 @@ body {
 .animate-aurora {
   animation: var(--animate-aurora);
 }
-.animate-shimmer {
-  animation: var(--animate-shimmer);
-}
 .animate-pulse-ring {
   animation: var(--animate-pulse-ring);
 }
@@ -282,12 +282,6 @@ body {
 }
 .stagger > *:nth-child(7) {
   animation-delay: 0.47s;
-}
-
-/* Equalizer bars */
-.eq-bar {
-  animation: equalize 1.1s ease-in-out infinite;
-  transform-origin: bottom;
 }
 
 /* Luxury text shimmer (for the name) */
@@ -409,4 +403,43 @@ body::after {
   );
   opacity: 0.35;
   transition: opacity 0.15s;
+}
+
+/* Hide the cursor glow on touch devices — there is no cursor to follow. */
+@media (pointer: coarse) {
+  body::after {
+    display: none;
+  }
+}
+
+/* Command menu entrance */
+.command-dialog[open] {
+  animation: dialog-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.command-dialog[open]::backdrop {
+  animation: fade-in 0.18s ease-out;
+}
+
+/* ── Reduced motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    /* biome-ignore lint/complexity/noImportantStyles: must beat inline animation styles for users who opt out of motion. */
+    animation-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: must beat inline animation styles for users who opt out of motion. */
+    animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: must beat inline animation styles for users who opt out of motion. */
+    transition-duration: 0.01ms !important;
+  }
+  .stagger > * {
+    opacity: 1;
+  }
+  .text-shimmer {
+    animation: none;
+    background-position: 50% 0;
+  }
 }

@@ -1,30 +1,41 @@
 "use client";
 
+import { ArrowUp } from "lucide-react";
 import type { ComponentProps } from "react";
 import { GithubIcon } from "@/shared/components/icons";
-import { personalInfo } from "@/shared/lib/config";
+import { personalInfo, siteConfig } from "@/shared/lib/config";
 import { cn } from "@/shared/lib/utils";
 import { useRotatingEmoji } from "../hooks/use-rotating-emoji";
 
 export function Footer({ className, ...props }: ComponentProps<"footer">) {
-  const emoji = useRotatingEmoji();
+  const { emoji, next } = useRotatingEmoji();
   const year = new Date().getFullYear();
 
   return (
     <footer
       className={cn(
-        "flex flex-col gap-3 border-t border-border pt-5 pb-6 text-sm text-muted-foreground",
+        "flex flex-col gap-4 border-t border-border pt-6 pb-8 text-sm text-muted-foreground",
         className,
       )}
       {...props}
     >
-      <div className="flex items-center">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <span className="flex items-center gap-1.5">
-          <span aria-hidden>{emoji}</span>
-          <time className="font-mono" dateTime={String(year)}>
-            {year}
-          </time>
-          <span className="text-border">·</span>
+          <button
+            type="button"
+            onClick={next}
+            onMouseEnter={next}
+            aria-label="Shuffle emoji"
+            className="rounded-sm transition-transform hover:scale-125"
+          >
+            <span aria-hidden>{emoji}</span>
+          </button>
+          <span>
+            © <time dateTime={String(year)}>{year}</time> {personalInfo.name}
+          </span>
+          <span aria-hidden className="text-border">
+            ·
+          </span>
           <span>
             he<span className="text-border">/</span>him
           </span>
@@ -35,17 +46,29 @@ export function Footer({ className, ...props }: ComponentProps<"footer">) {
           target="_blank"
           className="ml-auto flex items-center gap-1.5 transition-colors hover:text-primary"
         >
-          <GithubIcon />
+          <GithubIcon aria-hidden />
           <span>khasherdene-b</span>
         </a>
       </div>
 
-      <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">
-        <span>Developed by Khash-Erdene</span>
+      <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80">
         <span className="flex items-center gap-1.5">
-          <span className="size-1 rounded-full bg-primary animate-blink" />
-          <span>Art1val~</span>
+          <span
+            aria-hidden
+            className="size-1 rounded-full bg-primary animate-blink"
+          />
+          v{siteConfig.version} · Art1val~
         </span>
+        <a
+          href="#top"
+          className="group flex items-center gap-1 transition-colors hover:text-primary"
+        >
+          Back to top
+          <ArrowUp
+            aria-hidden
+            className="size-3 transition-transform group-hover:-translate-y-0.5"
+          />
+        </a>
       </div>
     </footer>
   );

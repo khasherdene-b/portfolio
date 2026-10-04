@@ -1,4 +1,10 @@
 export {
+  FacebookGlyph,
+  GithubGlyph,
+  InstagramGlyph,
+  LinkedinGlyph,
+} from "./brand-glyphs";
+export {
   CssIcon,
   HtmlIcon,
   IconGit,
@@ -19,7 +25,6 @@ export {
   SkillIconsDocker,
   SpringLightIcon,
 } from "./brand-icons";
-
 export {
   FacebookIcon,
   GithubIcon,

@@ -2,7 +2,7 @@ import { ArrowUpRight, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { GithubIcon } from "@/shared/components/icons";
-import { Spotlight } from "@/shared/components/ui/spotlight";
+import { CardBase } from "@/shared/components/ui/card-base";
 import { personalInfo } from "@/shared/lib/config";
 
 export function GithubCard() {
@@ -11,16 +11,17 @@ export function GithubCard() {
       href={personalInfo.social.github}
       target="_blank"
       rel="noopener noreferrer"
-      className="block h-full"
+      aria-label="GitHub — my experiments and projects (opens in a new tab)"
+      className="block h-full rounded-2xl"
     >
-      <Spotlight className="card-luxe group relative flex h-full min-h-36 w-full flex-col justify-between overflow-hidden rounded-2xl text-white">
+      <CardBase className="group relative flex h-full min-h-40 w-full flex-col justify-between rounded-2xl text-white">
         <span aria-hidden className="absolute inset-0 -z-10">
           <Image
             src="/assets/octocat.jpg"
             alt=""
             fill
-            priority
-            className="object-cover object-center brightness-[0.45]"
+            sizes="(min-width: 640px) 336px, 100vw"
+            className="object-cover object-center brightness-[0.45] transition-transform duration-700 group-hover:scale-105"
           />
           <span className="absolute inset-0 bg-linear-to-t from-black/85 via-black/40 to-transparent" />
           <span className="absolute inset-0 bg-linear-to-tr from-emerald-950/60 via-transparent to-emerald-500/10 mix-blend-overlay" />
@@ -34,7 +35,7 @@ export function GithubCard() {
               open source
             </span>
           </span>
-          <ArrowUpRight className="size-4 -translate-y-0.5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100" />
+          <ArrowUpRight className="size-4 text-white/60 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
         </span>
 
         <span className="relative z-10 space-y-0.5 p-5 pt-0">
@@ -45,7 +46,7 @@ export function GithubCard() {
             My experiments &amp; projects
           </span>
         </span>
-      </Spotlight>
+      </CardBase>
     </Link>
   );
 }
